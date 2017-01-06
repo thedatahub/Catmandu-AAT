@@ -1,8 +1,13 @@
 use strict;
 use Test::More;
-use Catmandu::Store::AAT;
 
-# replace with the actual test
-ok 1;
+my @pkgs = qw (
+    Catmandu::Store::AAT
+    Catmandu::Store::AAT::Bag
+    Catmandu::Store::AAT::API
+    Catmandu::Store::AAT::SPARQL
+);
 
-done_testing;
+require_ok $_ for @pkgs;
+
+done_testing 4;
