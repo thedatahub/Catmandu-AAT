@@ -35,7 +35,8 @@ sub id {
     my $self = shift;
     my $id_query = '?Subject dc:identifier "%s" .';
     my $query = $self->build_query(sprintf($id_query, $self->term));
-    return $self->request($query);
+    my $result = $self->request($query);
+    return $result->[0];
 }
 
 sub request {
