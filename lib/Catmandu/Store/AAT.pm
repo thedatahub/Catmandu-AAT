@@ -13,7 +13,9 @@ __END__
 
 =head1 NAME
 
-Catmandu::Store::AAT - Blah blah blah
+=for html <a href="https://travis-ci.org/thedatahub/Catmandu-Store-AAT"><img src="https://travis-ci.org/thedatahub/Catmandu-Store-AAT.svg?branch=master"></a>
+
+Catmandu::Store::AAT - Retrieve items from the AAT
 
 =head1 SYNOPSIS
 
