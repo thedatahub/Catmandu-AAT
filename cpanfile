@@ -13,3 +13,4 @@ requires 'LWP::UserAgent';
 requires 'LWP::Protocol::https';
 
 requires 'Catmandu', '>=1.0304';
+requires 'Catmandu::Fix::Datahub', '>=0.01';

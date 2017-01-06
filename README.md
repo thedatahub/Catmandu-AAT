@@ -8,9 +8,11 @@ Catmandu::Store::AAT - Retrieve items from the AAT
 
 # SYNOPSIS
 
-This module contains a [store](https://metacpan.org/pod/Catmandu::Store::AAT) to lookup a _Subject_ in the [AAT](https://www.getty.edu/research/tools/vocabularies/aat/) using its <SPARQL endpoint|http://vocab.getty.edu/sparql>.
+This module contains a [store](https://metacpan.org/pod/Catmandu::Store::AAT) to lookup a _Subject_ in the [AAT](https://www.getty.edu/research/tools/vocabularies/aat/) using its [SPARQL endpoint](http://vocab.getty.edu/sparql) and a [fix](https://metacpan.org/pod/Catmandu::Fix::aat_match) to match a term to a _Subject_.
 
     lookup_in_store(objectName, AAT, lang:nl)
+
+    aat_match(objectName, -lang:nl)
 
 # DESCRIPTION
 
@@ -24,7 +26,7 @@ This module contains a [store](https://metacpan.org/pod/Catmandu::Store::AAT) to
 
 The `lang` parameter is optional and defaults to _nl_. It sets
 the language of the returned _prefLabel_. If no _prefLabel_ for the
-_Subject_ exists, nothing is returned.
+_Subject_ in provided _lang_ exists, nothing is returned.
 
 The store takes the `dc:identifier` of a _Subject_ from the AAT and returns the following data:
 
@@ -33,6 +35,15 @@ The store takes the `dc:identifier` of a _Subject_ from the AAT and returns the 
       'prefLabel' => 'The prefLabel in the provided language',
       'uri'       => 'The URI of the Subject'
     }
+
+## [Catmandu::Fix::aat\_match](https://metacpan.org/pod/Catmandu::Fix::aat_match)
+
+    aat_match(
+      path,
+      -lang: nl
+    )
+
+A fix that performs a match between a term and a _prefLabel_ of an AAT _Subject_.
 
 # AUTHOR
 

@@ -26,7 +26,12 @@ sub match {
     my $self = shift;
     my $match_query = '?Subject skos:prefLabel "%s"@%s .';
     my $query = $self->build_query(sprintf($match_query, $self->term, $self->language));
-    return $self->request($query);
+    my $result = $self->request($query);
+    if (scalar @{$result} >= 1) {
+        return $result->[0];
+    } else {
+        return {};
+    }
 }
 
 ##
@@ -36,7 +41,11 @@ sub id {
     my $id_query = '?Subject dc:identifier "%s" .';
     my $query = $self->build_query(sprintf($id_query, $self->term));
     my $result = $self->request($query);
-    return $result->[0];
+    if (scalar @{$result} >= 1) {
+        return $result->[0];
+    } else {
+        return {};
+    }
 }
 
 sub request {
