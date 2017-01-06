@@ -8,11 +8,17 @@ Catmandu::Store::AAT - Retrieve items from the AAT
 
 # SYNOPSIS
 
-This module contains a [store](https://metacpan.org/pod/Catmandu::Store::AAT) to lookup a _Subject_ in the [AAT](https://www.getty.edu/research/tools/vocabularies/aat/) using its [SPARQL endpoint](http://vocab.getty.edu/sparql) and a [fix](https://metacpan.org/pod/Catmandu::Fix::aat_match) to match a term to a _Subject_.
+This module contains a [store](https://metacpan.org/pod/Catmandu::Store::AAT) to lookup a _Subject_ in the [AAT](https://www.getty.edu/research/tools/vocabularies/aat/)
+using its [SPARQL endpoint](http://vocab.getty.edu/sparql).
+
+Also included is a [fix](https://metacpan.org/pod/Catmandu::Fix::aat_match) to match a term to a _Subject_ and a
+[fix](https://metacpan.org/pod/Catmandu::Fix::aat_search) to search for a term in the AAT.
 
     lookup_in_store(objectName, AAT, lang:nl)
 
     aat_match(objectName, -lang:nl)
+
+    aat_search(objectName, -lang:nl)
 
 # DESCRIPTION
 
@@ -45,6 +51,15 @@ The store takes the `dc:identifier` of a _Subject_ from the AAT and returns the 
 
 A fix that performs a match between a term and a _prefLabel_ of an AAT _Subject_.
 
+## [Catmandu::Fix::aat\_search](https://metacpan.org/pod/Catmandu::Fix::aat_search)
+
+    aat_search(
+      path,
+      -lang: nl
+    )
+
+A fix that performs a search for a term in the AAT.
+
 # AUTHOR
 
 Pieter De Praetere &lt;pieter at packed.be >
@@ -61,3 +76,5 @@ it under the same terms as Perl itself.
 # SEE ALSO
 
 [Catmandu](https://metacpan.org/pod/Catmandu)
+[Catmandu::Fix::aat\_search](https://metacpan.org/pod/Catmandu::Fix::aat_search)
+[Catmandu::Fix::aat\_match](https://metacpan.org/pod/Catmandu::Fix::aat_match)
