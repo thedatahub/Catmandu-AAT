@@ -1,10 +1,18 @@
 package Catmandu::Store::AAT;
 
-use strict;
-use 5.008_005;
 our $VERSION = '0.01';
 
+use strict;
+use warnings;
 
+use Moo;
+use Catmandu::Sane;
+
+use Catmandu::Store::AAT::Bag;
+
+with 'Catmandu::Store';
+
+has lang => (is => 'ro', default => 'nl');
 
 1;
 __END__

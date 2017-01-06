@@ -1,5 +1,7 @@
 package Catmandu::Store::AAT::SPARQL;
 
+our $VERSION = '0.01';
+
 use strict;
 use warnings;
 
@@ -10,31 +12,37 @@ use LWP::UserAgent;
 use JSON;
 
 has query => (is => 'ro', required => 1);
-has url   => (is => 'ro', default => sub { 'http://vocab.getty.edu/sparql.json' });
-has lang  => (is => 'ro', default => sub { 'nl' });
+has url   => (is => 'ro', default => 'http://vocab.getty.edu/sparql.json');
+has lang  => (is => 'ro', default => 'nl');
 
 has results => (is => 'lazy');
 has ua      => (is => 'lazy');
 
 sub _build_ua {
     my $self = shift;
-    my $ua = LWP::UserAgent->new();
+    my $ua = LWP::UserAgent->new(
+        agent => sprintf('catmandu-store-aat/%s', $VERSION)
+    );
+    # Otherwise, the endpoint blows up.
+    $ua->default_header('Accept' => '*/*');
     return $ua;
 }
 
 
 sub _build_results {
     my $self = shift;
-    return $self->get();
+    my $r = $self->get();
+    return $r;
 }
 
 sub get {
     my $self = shift;
+    my $form_template = 'query=%s';
     my $form = {
         'query' => $self->query
     };
-    my $response = $self->ua->post($self->url, Content => $form);
-    if ($response->is_success) {
+    my $response = $self->ua->post($self->url, $form);
+    if ($response->is_success) {
         return decode_json($response->decoded_content);
     } else {
          Catmandu::HTTPError->throw({

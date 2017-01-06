@@ -9,7 +9,7 @@ use Catmandu::Sane;
 use Catmandu::Store::AAT::SPARQL;
 
 has term     => (is => 'ro', required => 1);
-has language => (is => 'ro', default => sub { 'nl' });
+has language => (is => 'ro', default => 'nl');
 
 ##
 # Search for a term
@@ -50,30 +50,23 @@ sub request {
 
 
 sub parse {
-    my ($self, $raw_results) : @_;
+    my ($self, $raw_results) = @_;
     my $results = [];
 
-    for my $raw_result (@{$raw_results->{'results'}->{'bindings'}}) {
+    foreach my $raw_result (@{$raw_results->{'results'}->{'bindings'}}) {
         my $result = {
             'prefLabel' => $raw_result->{'prefLabel'}->{'value'},
             'id' => $raw_result->{'id'}->{'value'},
             'uri' => $raw_result->{'Subject'}->{'value'}
-        }
+        };
+        push @{$results}, $result;
     }
     return $results;
 }
 
 sub build_query {
     my ($self, $match_query) = @_;
-    my $query = q(
-        select ?prefLabel ?id ?Subject ?scheme {
-            ?Subject xl:prefLabel [xl:literalForm ?prefLabel; dct:language gvp_lang:%s] .
-            ?Subject dc:identifier ?id .
-            ?Subject skos:inScheme <http://vocab.getty.edu/aat/> .
-            ?Subject skos:inScheme ?scheme .
-            %s
-        }
-    );
+    my $query = q(select ?prefLabel ?id ?Subject ?scheme { ?Subject xl:prefLabel [xl:literalForm ?prefLabel; dct:language gvp_lang:%s] . ?Subject dc:identifier ?id . ?Subject skos:inScheme <http://vocab.getty.edu/aat/> . ?Subject skos:inScheme ?scheme . %s });
     return sprintf($query, $self->language, $match_query);
 }
 
