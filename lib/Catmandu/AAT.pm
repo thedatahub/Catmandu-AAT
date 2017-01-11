@@ -9,7 +9,6 @@ use Catmandu::Sane;
 use Moo;
 
 1;
-__END__
 
 __END__
 
@@ -19,61 +18,45 @@ __END__
 
 =for html <a href="https://travis-ci.org/thedatahub/Catmandu-Store-AAT"><img src="https://travis-ci.org/thedatahub/Catmandu-Store-AAT.svg?branch=master"></a>
 
-Catmandu::AAT - Retrieve items from the AAT
+Catmandu::AAT - Retrieve and search items from the Getty AAT Thesaurus
 
 =head1 SYNOPSIS
 
-This module contains a L<store|Catmandu::Store::AAT> to lookup a I<Subject> in the L<AAT|https://www.getty.edu/research/tools/vocabularies/aat/>
-using its L<SPARQL endpoint|http://vocab.getty.edu/sparql>.
+    # From the command line
+    # From the command line
+    $ catmandu export AAT --id 300033618 --lang en to YAML
+    ---
+    id: '300033618'
+    prefLabel: paintings (visual works)
+    uri: http://vocab.getty.edu/aat/300033618
+    ...
 
-Also included is a L<fix|Catmandu::Fix::aat_match> to match a term to a I<Subject> and a
-L<fix|Catmandu::Fix::aat_search> to search for a term in the AAT.
+    # From a Catmandu Fix
+    lookup_in_store(
+      objectName,    # objectName is a field containing the AAT identifier
+      AAT,
+      lang: nl
+    )
 
-  lookup_in_store(objectName, AAT, lang:nl)
+    # Perform a direct match between a term and a Subject in the AAT
+    aat_match(objectName, -lang:nl)
 
-  aat_match(objectName, -lang:nl)
+    # Perform a search for a term in the AAT
+    aat_search(objectName, -lang:nl)
 
-  aat_search(objectName, -lang:nl)
+=head1 MODULES
 
-=head1 DESCRIPTION
+=over
 
-=head2 L<Catmandu::Store::AAT>
+=item * L<Catmandu::Store::AAT>
 
-  lookup_in_store(
-    objectName,
-    AAT,
-    lang: nl
-  )
+=item * L<Catmandu::Fix::aat_match>
 
-The C<lang> parameter is optional and defaults to I<nl>. It sets
-the language of the returned I<prefLabel>. If no I<prefLabel> for the
-I<Subject> in provided I<lang> exists, nothing is returned.
+=item * L<Catmandu::Fix::aat_search>
 
-The store takes the C<dc:identifier> of a I<Subject> from the AAT and returns the following data:
+=item * L<Catmandu::AAT::API>
 
-  {
-    'id'        => 'The dc:identifier of the Subject',
-    'prefLabel' => 'The prefLabel in the provided language',
-    'uri'       => 'The URI of the Subject'
-  }
-
-=head2 L<Catmandu::Fix::aat_match>
-
-  aat_match(
-    path,
-    -lang: nl
-  )
-
-A fix that performs a match between a term and a I<prefLabel> of an AAT I<Subject>.
-
-=head2 L<Catmandu::Fix::aat_search>
-
-  aat_search(
-    path,
-    -lang: nl
-  )
-
-A fix that performs a search for a term in the AAT.
+=back
 
 =head1 AUTHOR
 
