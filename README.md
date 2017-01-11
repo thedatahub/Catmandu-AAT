@@ -4,10 +4,11 @@
     <a href="https://travis-ci.org/thedatahub/Catmandu-Store-AAT"><img src="https://travis-ci.org/thedatahub/Catmandu-Store-AAT.svg?branch=master"></a>
 </div>
 
-Catmandu::Store::AAT - Retrieve items from the AAT
+Catmandu::AAT - Retrieve and search items from the Getty AAT Thesaurus
 
 # SYNOPSIS
 
+    # From the command line
     # From the command line
     $ catmandu export AAT --id 300033618 --lang en to YAML
     ---
@@ -23,55 +24,18 @@ Catmandu::Store::AAT - Retrieve items from the AAT
       lang: nl
     )
 
-    # From Perl code
-    use Catmandu;
+    # Perform a direct match between a term and a Subject in the AAT
+    aat_match(objectName, -lang:nl)
 
-    my $store = Catmandu->store('AAT', lang => 'en')->bag;
+    # Perform a search for a term in the AAT
+    aat_search(objectName, -lang:nl)
 
-    my $item = $store->get('300033618');
+# MODULES
 
-    print $item->{prefLabel} , "\n";  # paintings (visual works)
-
-# DESCRIPTION
-
-A Catmandu::Store::AAT is a Perl package that can query the <AAT|https://www.getty.edu/research/tools/vocabularies/aat/>
-Thesaurus using its [SPARQL endpoint](http://vocab.getty.edu/sparql).
-
-This store supports only one method `get` to retrieve an AAT record by its identifier
-
-# CONFIGURATION
-
-## lang
-
-Optional. Set the language of record to be returned.
-
-# METHODS
-
-## new(%configuration)
-
-Create a new Catmandu::Store::AAT
-
-## get($id)
-
-Retrieve an AAT record given an identifier. Returns a record like:
-
-    {
-      'id'        => 'The dc:identifier of the Subject',
-      'prefLabel' => 'The prefLabel in the provided language',
-      'uri'       => 'The URI of the Subject'
-    }
-
-## add()
-
-Not supported
-
-## delete()
-
-Not supported
-
-## each()
-
-Not supported
+- [Catmandu::Store::AAT](https://metacpan.org/pod/Catmandu::Store::AAT)
+- [Catmandu::Fix::aat\_match](https://metacpan.org/pod/Catmandu::Fix::aat_match)
+- [Catmandu::Fix::aat\_search](https://metacpan.org/pod/Catmandu::Fix::aat_search)
+- [Catmandu::AAT::API](https://metacpan.org/pod/Catmandu::AAT::API)
 
 # AUTHOR
 
@@ -89,6 +53,6 @@ it under the same terms as Perl itself.
 # SEE ALSO
 
 [Catmandu](https://metacpan.org/pod/Catmandu)
-[Catmandu::AAT](https://metacpan.org/pod/Catmandu::AAT)
+[Catmandu::Store::AAT](https://metacpan.org/pod/Catmandu::Store::AAT)
 [Catmandu::Fix::aat\_search](https://metacpan.org/pod/Catmandu::Fix::aat_search)
 [Catmandu::Fix::aat\_match](https://metacpan.org/pod/Catmandu::Fix::aat_match)
