@@ -68,10 +68,10 @@ __END__
 
 =head2 SPARQL Query
 
-    select ?prefLabel ?id ?Subject ?scheme {
-        ?Subject xl:prefLabel|xl:altLabel [xl:literalForm ?prefLabel; dct:language gvp_lang:nl] .
+    select ?anyLabel ?id ?Subject ?scheme {
+        ?Subject xl:prefLabel|xl:altLabel [xl:literalForm ?anyLabel; dct:language gvp_lang:nl] .
+        values ?scheme {<http://vocab.getty.edu/aat/>} .
         ?Subject dc:identifier ?id .
-        ?Subject skos:inScheme <http://vocab.getty.edu/aat/> .
         ?Subject skos:inScheme ?scheme .
         ?Subject luc:term "schildering" .
     }

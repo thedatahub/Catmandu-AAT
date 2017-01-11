@@ -76,7 +76,7 @@ sub parse {
 
 sub build_query {
     my ($self, $match_query) = @_;
-    my $query = q(select ?prefLabel ?id ?Subject ?scheme { ?Subject xl:prefLabel [xl:literalForm ?prefLabel; dct:language gvp_lang:%s] . ?Subject dc:identifier ?id . ?Subject skos:inScheme <http://vocab.getty.edu/aat/> . ?Subject skos:inScheme ?scheme . %s });
+    my $query = q(select ?prefLabel ?id ?Subject ?scheme { ?Subject xl:prefLabel [xl:literalForm ?prefLabel; dct:language gvp_lang:%s] . values ?scheme {<http://vocab.getty.edu/aat/>} . ?Subject dc:identifier ?id . ?Subject skos:inScheme ?scheme . %s });
     return sprintf($query, $self->language, $match_query);
 }
 
