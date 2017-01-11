@@ -11,21 +11,25 @@ BEGIN {
     use_ok $pkg;
 }
 
-my $record = {
-    'objectName' => 'schilderingen'
-};
+SKIP: {
+    skip "Need network set \$ENV{RELEASE_TESTING}",2 unless $ENV{RELEASE_TESTING};
 
-my $record_lang = {
-    'objectName' => 'matte paintings'
-};
+    my $record = {
+        'objectName' => 'schilderingen'
+    };
 
-my $fixer = Catmandu::Fix->new(fixes => ['aat_search(objectName)']);
-my $fixer_lang = Catmandu::Fix->new(fixes => ['aat_search(objectName,  -lang:en)']);
+    my $record_lang = {
+        'objectName' => 'matte paintings'
+    };
 
-$fixer->fix($record);
-$fixer_lang->fix($record_lang);
+    my $fixer = Catmandu::Fix->new(fixes => ['aat_search(objectName)']);
+    my $fixer_lang = Catmandu::Fix->new(fixes => ['aat_search(objectName,  -lang:en)']);
 
-isa_ok($record->{'objectName'}, 'ARRAY');
-isa_ok($record_lang->{'objectName'}, 'ARRAY');
+    $fixer->fix($record);
+    $fixer_lang->fix($record_lang);
+
+    isa_ok($record->{'objectName'}, 'ARRAY');
+    isa_ok($record_lang->{'objectName'}, 'ARRAY');
+}
 
 done_testing 3;

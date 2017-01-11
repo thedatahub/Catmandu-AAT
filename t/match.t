@@ -11,37 +11,41 @@ BEGIN {
     use_ok $pkg;
 }
 
-my $record = {
-    'objectName' => 'schilderingen'
-};
+SKIP : {
+    skip "Need network set \$ENV{RELEASE_TESTING}",2 unless $ENV{RELEASE_TESTING};
 
-my $record_lang = {
-    'objectName' => 'paintings (visual works)'
-};
+    my $record = {
+        'objectName' => 'schilderingen'
+    };
 
-my $fixer = Catmandu::Fix->new(fixes => ['aat_match(objectName)']);
-my $fixer_lang = Catmandu::Fix->new(fixes => ['aat_match(objectName,  -lang:en)']);
+    my $record_lang = {
+        'objectName' => 'paintings (visual works)'
+    };
 
-$fixer->fix($record);
-$fixer_lang->fix($record_lang);
+    my $fixer = Catmandu::Fix->new(fixes => ['aat_match(objectName)']);
+    my $fixer_lang = Catmandu::Fix->new(fixes => ['aat_match(objectName,  -lang:en)']);
 
-my $expected = {
-    'objectName' => {
-        'id' => '300033618',
-        'prefLabel' => 'schilderingen',
-        'uri' => 'http://vocab.getty.edu/aat/300033618'
-    }
-};
+    $fixer->fix($record);
+    $fixer_lang->fix($record_lang);
 
-my $expected_lang = {
-    'objectName' => {
-        'id' => '300033618',
-        'prefLabel' => 'paintings (visual works)',
-        'uri' => 'http://vocab.getty.edu/aat/300033618'
-    }
-};
+    my $expected = {
+        'objectName' => {
+            'id' => '300033618',
+            'prefLabel' => 'schilderingen',
+            'uri' => 'http://vocab.getty.edu/aat/300033618'
+        }
+    };
 
-is_deeply $record, $expected;
-is_deeply $record_lang, $expected_lang;
+    my $expected_lang = {
+        'objectName' => {
+            'id' => '300033618',
+            'prefLabel' => 'paintings (visual works)',
+            'uri' => 'http://vocab.getty.edu/aat/300033618'
+        }
+    };
+
+    is_deeply $record, $expected;
+    is_deeply $record_lang, $expected_lang;
+}
 
 done_testing 3;

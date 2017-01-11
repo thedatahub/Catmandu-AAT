@@ -4,31 +4,37 @@
     <a href="https://travis-ci.org/thedatahub/Catmandu-Store-AAT"><img src="https://travis-ci.org/thedatahub/Catmandu-Store-AAT.svg?branch=master"></a>
 </div>
 
-Catmandu::Store::AAT - Retrieve items from the AAT
+Catmandu::AAT - Retrieve and search items from the Getty AAT Thesaurus
 
 # SYNOPSIS
 
-    lookup_in_store(objectName, AAT, lang:nl)
+    # From the command line
+    $ catmandu export AAT --id 300033618 --lang en to YAML
+    ---
+    id: '300033618'
+    prefLabel: paintings (visual works)
+    uri: http://vocab.getty.edu/aat/300033618
+    ...
 
-# DESCRIPTION
-
+    # From a Catmandu Fix
     lookup_in_store(
-      objectName,
+      objectName,    # objectName is a field containing the AAT identifier
       AAT,
       lang: nl
     )
 
-The `lang` parameter is optional and defaults to _nl_. It sets
-the language of the returned _prefLabel_. If no _prefLabel_ for the
-_Subject_ in provided _lang_ exists, nothing is returned.
+    # Perform a direct match between a term and a Subject in the AAT
+    aat_match(objectName, -lang:nl)
 
-The store takes the `dc:identifier` of a _Subject_ from the AAT and returns the following data:
+    # Perform a search for a term in the AAT
+    aat_search(objectName, -lang:nl)
 
-    {
-      'id'        => 'The dc:identifier of the Subject',
-      'prefLabel' => 'The prefLabel in the provided language',
-      'uri'       => 'The URI of the Subject'
-    }
+# MODULES
+
+- [Catmandu::Store::AAT](https://metacpan.org/pod/Catmandu::Store::AAT)
+- [Catmandu::Fix::aat\_match](https://metacpan.org/pod/Catmandu::Fix::aat_match)
+- [Catmandu::Fix::aat\_search](https://metacpan.org/pod/Catmandu::Fix::aat_search)
+- [Catmandu::AAT::API](https://metacpan.org/pod/Catmandu::AAT::API)
 
 # AUTHOR
 
@@ -46,6 +52,6 @@ it under the same terms as Perl itself.
 # SEE ALSO
 
 [Catmandu](https://metacpan.org/pod/Catmandu)
-[Catmandu::AAT](https://metacpan.org/pod/Catmandu::AAT)
+[Catmandu::Store::AAT](https://metacpan.org/pod/Catmandu::Store::AAT)
 [Catmandu::Fix::aat\_search](https://metacpan.org/pod/Catmandu::Fix::aat_search)
 [Catmandu::Fix::aat\_match](https://metacpan.org/pod/Catmandu::Fix::aat_match)
