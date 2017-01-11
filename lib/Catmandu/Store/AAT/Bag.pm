@@ -6,7 +6,7 @@ use warnings;
 use Moo;
 use Catmandu::Sane;
 
-use Catmandu::Store::AAT::API;
+use Catmandu::AAT::API;
 
 with 'Catmandu::Bag';
 
@@ -16,7 +16,7 @@ sub generator {
 
 sub get {
     my ($self, $id) = @_;
-    my $api = Catmandu::Store::AAT::API->new(term => $id, language => $self->store->lang);
+    my $api = Catmandu::AAT::API->new(term => $id, language => $self->store->lang);
     return $api->id();
 }
 

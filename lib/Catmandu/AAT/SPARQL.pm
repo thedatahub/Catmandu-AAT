@@ -1,4 +1,4 @@
-package Catmandu::Store::AAT::SPARQL;
+package Catmandu::AAT::SPARQL;
 
 our $VERSION = '0.01';
 

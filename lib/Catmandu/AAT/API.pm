@@ -1,4 +1,4 @@
-package Catmandu::Store::AAT::API;
+package Catmandu::AAT::API;
 
 use strict;
 use warnings;
@@ -6,7 +6,7 @@ use warnings;
 use Moo;
 use Catmandu::Sane;
 
-use Catmandu::Store::AAT::SPARQL;
+use Catmandu::AAT::SPARQL;
 
 has term     => (is => 'ro', required => 1);
 has language => (is => 'ro', default => 'nl');
@@ -50,7 +50,7 @@ sub id {
 
 sub request {
     my ($self, $query) = @_;
-    my $sparql = Catmandu::Store::AAT::SPARQL->new(query => $query, lang => $self->language);
+    my $sparql = Catmandu::AAT::SPARQL->new(query => $query, lang => $self->language);
     if (defined ($sparql->results)) {
         return $self->parse($sparql->results);
     } else {
