@@ -4,7 +4,7 @@
     <a href="https://travis-ci.org/thedatahub/Catmandu-Store-AAT"><img src="https://travis-ci.org/thedatahub/Catmandu-Store-AAT.svg?branch=master"></a>
 </div>
 
-Catmandu::Store::AAT - Retrieve items from the AAT
+Catmandu::AAT - Retrieve items from the AAT
 
 # SYNOPSIS
 
@@ -76,5 +76,6 @@ it under the same terms as Perl itself.
 # SEE ALSO
 
 [Catmandu](https://metacpan.org/pod/Catmandu)
+[Catmandu::Store::AAT](https://metacpan.org/pod/Catmandu::Store::AAT)
 [Catmandu::Fix::aat\_search](https://metacpan.org/pod/Catmandu::Fix::aat_search)
 [Catmandu::Fix::aat\_match](https://metacpan.org/pod/Catmandu::Fix::aat_match)
