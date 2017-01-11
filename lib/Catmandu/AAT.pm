@@ -23,7 +23,6 @@ Catmandu::AAT - Retrieve and search items from the Getty AAT Thesaurus
 =head1 SYNOPSIS
 
     # From the command line
-    # From the command line
     $ catmandu export AAT --id 300033618 --lang en to YAML
     ---
     id: '300033618'
