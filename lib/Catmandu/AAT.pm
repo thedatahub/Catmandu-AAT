@@ -1,5 +1,7 @@
 package Catmandu::AAT;
 
+our $VERSION = '0.01';
+
 use strict;
 use warnings;
 
