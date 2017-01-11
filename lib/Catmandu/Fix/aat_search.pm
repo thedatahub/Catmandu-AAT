@@ -18,7 +18,7 @@ sub emit {
     my ($self, $fixer) = @_;
     my $perl = '';
 
-    $perl .= 'use Catmandu::Store::AAT::API;';
+    $perl .= 'use Catmandu::AAT::API;';
     
     my $term = $fixer->generate_var();
     my $aat = $fixer->generate_var();
@@ -26,7 +26,7 @@ sub emit {
     $perl .= "my ${term};";
     $perl .= declare_source($fixer, $self->path, $term);
 
-    $perl .= "my ${aat} = Catmandu::Store::AAT::API->new(term => ${term}, language => '".$self->lang."');";
+    $perl .= "my ${aat} = Catmandu::AAT::API->new(term => ${term}, language => '".$self->lang."');";
 
     $perl .= $fixer->emit_create_path(
         $fixer->var,
@@ -113,6 +113,7 @@ it under the same terms as Perl itself.
 =head1 SEE ALSO
 
 L<Catmandu>
+L<Catmandu::AAT>
 L<Catmandu::Store::AAT>
 L<Catmandu::Fix::aat_search>
 
