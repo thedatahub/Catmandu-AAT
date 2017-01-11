@@ -8,27 +8,70 @@ Catmandu::Store::AAT - Retrieve items from the AAT
 
 # SYNOPSIS
 
-    lookup_in_store(objectName, AAT, lang:nl)
+    # From the command line
+    $ catmandu export AAT --id 300033618 --lang en to YAML
+    ---
+    id: '300033618'
+    prefLabel: paintings (visual works)
+    uri: http://vocab.getty.edu/aat/300033618
+    ...
 
-# DESCRIPTION
-
+    # From a Catmandu Fix
     lookup_in_store(
-      objectName,
+      objectName,    # objectName is a field containing the AAT identifier
       AAT,
       lang: nl
     )
 
-The `lang` parameter is optional and defaults to _nl_. It sets
-the language of the returned _prefLabel_. If no _prefLabel_ for the
-_Subject_ in provided _lang_ exists, nothing is returned.
+    # From Perl code
+    use Catmandu;
 
-The store takes the `dc:identifier` of a _Subject_ from the AAT and returns the following data:
+    my $store = Catmandu->store('AAT', lang => 'en')->bag;
+
+    my $item = $store->get('300033618');
+
+    print $item->{prefLabel} , "\n";  # paintings (visual works)
+
+# DESCRIPTION
+
+A Catmandu::Store::AAT is a Perl package that can query the <AAT|https://www.getty.edu/research/tools/vocabularies/aat/>
+Thesaurus using its [SPARQL endpoint](http://vocab.getty.edu/sparql).
+
+This store supports only one method `get` to retrieve an AAT record by its identifier
+
+# CONFIGURATION
+
+## lang
+
+Optional. Set the language of record to be returned.
+
+# METHODS
+
+## new(%configuration)
+
+Create a new Catmandu::Store::AAT
+
+## get($id)
+
+Retrieve an AAT record given an identifier. Returns a record like:
 
     {
       'id'        => 'The dc:identifier of the Subject',
       'prefLabel' => 'The prefLabel in the provided language',
       'uri'       => 'The URI of the Subject'
     }
+
+## add()
+
+Not supported
+
+## delete()
+
+Not supported
+
+## each()
+
+Not supported
 
 # AUTHOR
 
