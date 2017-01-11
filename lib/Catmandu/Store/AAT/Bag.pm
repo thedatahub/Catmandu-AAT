@@ -12,6 +12,9 @@ with 'Catmandu::Bag';
 
 sub generator {
     my $self = shift;
+    Catmandu::NotImplemented->throw(
+        message => 'Iterating over items not supported.'
+    );
 }
 
 sub get {
