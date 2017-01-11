@@ -80,6 +80,18 @@ Retrieve an AAT record given an identifier. Returns a record like:
     'uri'       => 'The URI of the Subject'
   }
 
+=head2 add()
+
+Not supported
+
+=head2 delete()
+
+Not supported
+
+=head2 each()
+
+Not supported
+
 =head1 AUTHOR
 
 Pieter De Praetere E<lt>pieter at packed.be E<gt>
