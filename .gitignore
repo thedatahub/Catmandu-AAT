@@ -6,3 +6,5 @@ MYMETA.*
 !META.json
 /.prove
 Catmandu-AAT-*
+cpanfile.snapshot
+local
